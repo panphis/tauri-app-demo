@@ -18,7 +18,7 @@ export default function Home() {
 				This is an app build with next.js and tauri.
 			</p>
 			<p className={`m-2 px-2 max-w-[30ch] text-sm opacity-50`}>Message:{msg}</p>
-			<button className="mt-2 rounded border-stone-300 bg-white px-4 py-1" onClick={test}>test</button>
+			<button className="mt-2 rounded border-stone-300 bg-white dark:bg-slate-600 px-4 py-1" onClick={test}>test</button>
 		</main>
 	);
 }
