@@ -1,24 +1,36 @@
 "use client"
+import { useState, useEffect } from "react";
+import { Summary } from "@/components/page/home";
+import { Skeleton } from "@/components/ui"
+import { get_system_info, SystemInfo } from "@/invoke";
 
-import { ReactNode, useState } from "react";
-import { invoke } from "@tauri-apps/api/tauri";
+
+
 
 export default function Home() {
+	const [systemInfo, setSystemInfo] = useState<SystemInfo | undefined>();
 
-	const [msg, setMsg] = useState<String>('');
-
-	const test = async () => {
-		setMsg(await invoke("greet", { name: 'sssss' }));
-	}
-
+	useEffect(() => {
+		!async function () {
+			const result = await get_system_info()
+			setSystemInfo(result)
+		}();
+	}, [])
 
 	return (
-		<main className="flex min-h-screen flex-col items-center text-balance justify-evenly gap-1">
-			<p className={`m-8 px-2 text-sm opacity-50`}>
-				This is an app build with next.js and tauri.
-			</p>
-			<p className={`m-2 px-2 max-w-[30ch] text-sm opacity-50`}>Message:{msg}</p>
-			<button className="mt-2 rounded border-stone-300 bg-white dark:bg-slate-600 px-4 py-1" onClick={test}>test</button>
+		<main className="min-h-screen">
+			{
+				systemInfo ?
+					<Summary systemInfo={systemInfo} /> :
+
+					<div className="flex flex-col space-y-3">
+						<Skeleton className="h-[125px] w-[250px] rounded-xl" />
+						<div className="space-y-2">
+							<Skeleton className="h-4 w-[250px]" />
+							<Skeleton className="h-4 w-[200px]" />
+						</div>
+					</div>
+			}
 		</main>
 	);
 }
