@@ -96,11 +96,13 @@ impl SystemInfo {
         /* disk info */
         let disk_set = Disks::new_with_refreshed_list();
 
-        let disks = disk_set
+        let mut disks: Vec<DiskInfo> = disk_set
             .list()
-            .iter()i
-            .map(|disk| generate_disk_Info(disk))
+            .iter()
+            .map(|disk| generate_disk_info(disk))
             .collect();
+
+        disks.sort_by(|a, b| a.mount_point.cmp(&b.mount_point));
 
         /* memory info */
         let total_memory = sys.total_memory();

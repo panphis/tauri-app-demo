@@ -69,7 +69,11 @@
 
 body {
 	color: rgb(var(--foreground-rgb));
-	background: linear-gradient(to bottom,
+	min-height: 100vh;
+	background: linear-gradient(
+			to bottom,
 			transparent,
-			rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb));
 }

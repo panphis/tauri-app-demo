@@ -1,30 +1,26 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
-import { Summary } from "@/components/page/home";
-import { Skeleton } from "@/components/ui"
-import { get_system_info, SystemInfo } from "@/invoke";
-
-
-
+import { Summary, Details } from "@/components/page/home";
+import { get_system_info } from "@/invoke";
+import { SystemInfo } from "@/interface";
 
 export default function Home() {
-	const [loading, setLoading] = useState<boolean>(false)
+	const [loading, setLoading] = useState<boolean>(false);
 	const [systemInfo, setSystemInfo] = useState<SystemInfo | undefined>();
 
 	useEffect(() => {
-		!async function () {
-			setLoading(true)
-			const result = await get_system_info()
-			setSystemInfo(result)
-			setLoading(false)
-		}();
-	}, [])
+		!(async function () {
+			setLoading(true);
+			const result = await get_system_info();
+			setSystemInfo(result);
+			setLoading(false);
+		})();
+	}, []);
 
 	return (
-		<main className="min-h-screen">
-
+		<main className='flex flex-col gap-4 p-4'>
 			<Summary systemInfo={systemInfo} loading={loading} />
-
+			<Details systemInfo={systemInfo} loading={loading} />
 		</main>
 	);
 }
