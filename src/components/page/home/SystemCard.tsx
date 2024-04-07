@@ -1,22 +1,16 @@
 import React, { Fragment, type FC } from "react";
 import { Card } from "@/components";
-import { SystemInfo } from "@/invoke";
+import { PropsSystemInfo } from "./";
 
-type SystemCardProps = {
-	systemInfo: SystemInfo
-};
-
-export const SystemCard: FC<SystemCardProps> = ({ systemInfo }) => {
-	console.log(systemInfo);
-
-	return <Card title="系统信息">
+export const SystemCard: FC<PropsSystemInfo> = ({ systemInfo, loading }) => {
+	return <Card title="系统信息" loading={loading}>
 		<div className="text-2xl font-bold">
-			{systemInfo.system_name}
+			{systemInfo?.system_name || '--'}
 			<span className="text-xs text-muted-foreground">
-				{systemInfo.os_version}
+				{systemInfo?.os_version || '--'}
 			</span></div>
-		<p className="text-xs text-muted-foreground">
-			{systemInfo.host_name}
+		<p className="text-xs mt-2 text-muted-foreground">
+			{systemInfo?.host_name || '--'}
 		</p>
 	</Card>;
 };

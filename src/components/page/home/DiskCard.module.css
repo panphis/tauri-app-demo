@@ -1,0 +1,17 @@
+.diskInfo_info {
+	grid-template:
+		"mount_point progress" auto
+		"empty size_info" auto / 30px 1fr;
+}
+
+.diskInfo_mount_point {
+	grid-area: mount_point;
+}
+
+.diskInfo_progress {
+	grid-area: progress;
+}
+
+.diskInfo_size_info {
+	grid-area: size_info;
+}

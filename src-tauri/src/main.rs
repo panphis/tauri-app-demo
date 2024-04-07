@@ -3,7 +3,6 @@
 
 mod system_info;
 use system_info::get_system_info;
-use system_info::SystemInfo;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
