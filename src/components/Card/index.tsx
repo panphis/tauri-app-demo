@@ -8,7 +8,7 @@ import {
 } from "@/components/ui"
 
 type CardProps = {
-	title?: string,
+	title?: React.ReactNode,
 	icon?: React.ReactNode,
 	children: React.ReactNode,
 	loading?: boolean
