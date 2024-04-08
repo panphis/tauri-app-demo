@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@/components/ui";
 import "./globals.css";
 
@@ -16,9 +17,15 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html lang='en' suppressHydrationWarning>
 			<body className={inter.className}>
-				<TooltipProvider>{children}</TooltipProvider>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange>
+					<TooltipProvider>{children}</TooltipProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);
