@@ -54,14 +54,8 @@ export const generateUniformColors = (
 	const maxHue = 360;
 	const step = maxHue / numColors;
 
-	let randomValue;
-	if (window?.crypto?.getRandomValues) {
-		const hueArray = new Uint16Array(1);
-		window.crypto.getRandomValues(hueArray);
-		randomValue = hueArray[0] % maxHue;
-	} else {
-		randomValue = Math.floor(Math.random() * maxHue);
-	}
+	let randomValue = Math.floor(Math.random() * maxHue);
+
 
 	for (let i = 0; i < numColors; i++) {
 		const hue = (step * i + randomValue) % maxHue;

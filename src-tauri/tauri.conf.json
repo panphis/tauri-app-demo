@@ -30,7 +30,7 @@
 				"icons/icon_32x32.png",
 				"icons/icon_72x72.png"
 			],
-			"identifier": "com.tauri.dev",
+			"identifier": "com.panfengma.com",
 			"longDescription": "",
 			"macOS": {
 				"entitlements": null,
@@ -45,7 +45,10 @@
 			"windows": {
 				"certificateThumbprint": null,
 				"digestAlgorithm": "sha256",
-				"timestampUrl": ""
+				"timestampUrl": "",
+				"webviewInstallMode": {
+					"type": "offlineInstaller"
+				}
 			}
 		},
 		"security": {
