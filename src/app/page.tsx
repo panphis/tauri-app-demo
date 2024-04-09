@@ -10,7 +10,7 @@ export default function Home() {
 	return (
 		<main className='flex flex-col gap-4 p-4'>
 			<Summary systemInfo={systemInfo} loading={initializing} />
-			<Details initializing={initializing} cpuUsage={cpuUsage} cpuCores={cpuCores} cpuCoresNames={cpuCoresNames} />
+			<Details systemInfo={systemInfo} loading={initializing} initializing={initializing} cpuUsage={cpuUsage} cpuCores={cpuCores} cpuCoresNames={cpuCoresNames}/>
 		</main>
 	);
 }

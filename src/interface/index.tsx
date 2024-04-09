@@ -30,7 +30,7 @@ export interface SystemInfo {
 	cpus: CPUInfo[];
 	cpu_usage: number;
 
-	disks: [DiskInfo];
+	disks: DiskInfo[];
 
 	used_memory: number;
 	free_memory: number;

@@ -8,8 +8,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui";
-import { DiskInfo } from "@/invoke";
-import { PropsSystemInfo } from "./type";
+import { PropsSystemInfo, DiskInfo } from "@/interface";
 
 import { formatMemorySize } from "@/utils";
 

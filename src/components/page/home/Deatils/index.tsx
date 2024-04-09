@@ -1,3 +1,4 @@
 export * from "./CPUCore";
 
-export * from "./Deatils";
+export * from "./Details";
+export * from "./Disk"

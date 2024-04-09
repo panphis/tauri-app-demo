@@ -24,7 +24,6 @@ export const CpuCoreUsage: FC<CpuCoreUsageProps> = ({
 }) => {
 	const colors = useMemo(() => {
 		const color = generateUniformColors(cpuCoresNames.length);
-		console.log(color);
 		return color;
 	}, [cpuCoresNames]);
 
