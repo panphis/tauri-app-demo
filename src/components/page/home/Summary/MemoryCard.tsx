@@ -27,7 +27,7 @@ export const MemoryCard: FC<PropsSystemInfo> = ({ systemInfo, loading }) => {
 				description={
 					<Ratio
 						ratio={
-							(systemInfo?.used_memory ?? 0) / (systemInfo?.total_memory ?? 1)
+							(systemInfo?.memory_percentage ?? 0)
 						}
 					/>
 				}

@@ -1,5 +1,5 @@
 
-import { CPUInfo, CpuCoreRecords, CpuCoreUsageRecorders, CpuCoresNames, CpuUsageRecorder, SystemInfo, } from "@/interface";
+import { CPUInfo, CpuCoreRecords, CpuCoreUsageRecorders, CpuCoresNames, CpuUsageRecorder, SystemInfo, MemoryRecords, Memory } from "@/interface";
 import { get_system_info } from "@/invoke";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { formatTime } from "@/utils";
@@ -10,7 +10,8 @@ interface SystemInfoState {
 	initializing: boolean;
 	cpuCores: CpuCoreRecords,
 	cpuUsage: CpuCoreUsageRecorders,
-	cpuCoresNames: CpuCoresNames
+	cpuCoresNames: CpuCoresNames,
+	memories: MemoryRecords
 }
 
 export const useSystemInfo = (): SystemInfoState => {
@@ -20,10 +21,10 @@ export const useSystemInfo = (): SystemInfoState => {
 	const cpuCores = useRef<CpuCoreRecords>(new Map());
 	const cpuCoresNames = useRef<CpuCoresNames>([]);
 	const cpuUsage = useRef<CpuCoreUsageRecorders>([]);
-
+	const memories = useRef<MemoryRecords>([]);
 	const intervalId = useRef<NodeJS.Timeout>();
 
-	const generatorCpus = useCallback((newRecorder: CPUInfo[]) => {
+	const generatorCpus = useCallback((newRecorder: CPUInfo[], time: string) => {
 		const { current } = cpuCores
 
 		// 如果没有初始化过则先初始化一次
@@ -32,7 +33,6 @@ export const useSystemInfo = (): SystemInfoState => {
 			cpuCores: CpuCoreRecords,
 			cpuCoresNames: CpuCoresNames
 		} => {
-			const time = formatTime(new Date(), 'mm:ss')
 			const cpuUsage: CpuCoreUsageRecorders = []
 			const cpuCores: CpuCoreRecords = new Map()
 			const cpuCoresNames: CpuCoresNames = []
@@ -61,7 +61,6 @@ export const useSystemInfo = (): SystemInfoState => {
 		} => {
 			const _cpuUsage: CpuCoreUsageRecorders = cpuUsage.current
 			const _cpuCores: CpuCoreRecords = new Map(cpuCores.current)
-			const time = formatTime(new Date(), 'mm:ss')
 			const newNode: CpuUsageRecorder = { time }
 			newRecorder.forEach(({ name, cpu_usage }) => {
 				const oldValue = _cpuCores.get(name)!
@@ -100,12 +99,33 @@ export const useSystemInfo = (): SystemInfoState => {
 		}
 	}, [])
 
+
+	const generatorMemories = useCallback((used_memory: Memory, total_memory: Memory, time: string) => {
+		const { current } = memories
+		const recorder = { time, value: used_memory }
+		if (current.length === 0) {
+			memories.current = [recorder]
+			return
+		} else {
+			if (current?.length < 100) {
+				current?.push(recorder)
+			} else {
+				current?.shift()
+				current?.push(recorder)
+			}
+		}
+		memories.current = [...current]
+	}, [])
+
 	useEffect(() => {
 		const loadData = async () => {
 			setLoading(true);
 			const result = await get_system_info();
-			const { cpus } = result;
-			generatorCpus(cpus)
+			const { cpus, total_memory, used_memory } = result;
+
+			const now = formatTime(new Date(), 'mm:ss')
+			generatorCpus(cpus, now)
+			generatorMemories(used_memory, total_memory, now)
 			setSystemInfo(result);
 			setLoading(false);
 		}
@@ -150,6 +170,7 @@ export const useSystemInfo = (): SystemInfoState => {
 		systemInfo,
 		cpuCores: cpuCores.current,
 		cpuUsage: cpuUsage.current,
-		cpuCoresNames: cpuCoresNames.current
+		cpuCoresNames: cpuCoresNames.current,
+		memories: memories.current
 	}
 }

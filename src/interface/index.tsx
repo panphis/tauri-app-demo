@@ -17,7 +17,7 @@ export type CPUInfo = {
 	frequency: number;
 };
 
-
+export type Memory = number
 
 
 export interface SystemInfo {
@@ -32,9 +32,10 @@ export interface SystemInfo {
 
 	disks: DiskInfo[];
 
-	used_memory: number;
-	free_memory: number;
-	total_memory: number;
+	used_memory: Memory;
+	free_memory: Memory;
+	memory_percentage: number;
+	total_memory: Memory;
 }
 
 export type PropsSystemInfo = {
@@ -72,4 +73,16 @@ export interface SystemInfo extends PropsSystemInfo {
 };
 
 
-export type PropsCPUDetailInfo = Pick<SystemInfo, 'initializing' | 'cpuCores' | 'cpuUsage' | 'cpuCoresNames'>
+export type PropsCPUDetailInfo = Pick<SystemInfo, 'loading' | 'cpuCores' | 'cpuUsage' | 'cpuCoresNames'>
+
+export interface MemoryRecorder {
+	time: XAxisTime,
+	value: Memory,
+}
+
+export interface MemoryRecords extends Array<MemoryRecorder> { }
+
+
+export interface MemoriesProps extends PropsSystemInfo {
+	memories: MemoryRecords;
+};

@@ -12,14 +12,14 @@ const types = {
 }
 
 
-export const CPUCore: FC<PropsCPUDetailInfo> = ({ cpuUsage, cpuCores, initializing, cpuCoresNames }) => {
+export const CPUCore: FC<PropsCPUDetailInfo> = ({ cpuUsage, cpuCores, loading, cpuCoresNames }) => {
 	return (
 		<Tabs defaultValue={types.cpu} className="sm:col-span-1 md:col-span-1 xl:col-span-1 2xl:col-span-4">
 			<Card title={<Fragment>Cpu 逻辑处理器</Fragment>} icon={
 				<TabsList>
 					<TabsTrigger value={types.cpu}>总览</TabsTrigger>
 					<TabsTrigger value={types.core}>内核详情</TabsTrigger>
-				</TabsList>} loading={initializing}>
+				</TabsList>} loading={loading}>
 
 				<TabsContent value={types.cpu}>
 					<CpuCoreUsage data={cpuUsage} cpuCoresNames={cpuCoresNames} /></TabsContent>

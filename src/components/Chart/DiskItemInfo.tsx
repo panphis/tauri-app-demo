@@ -83,10 +83,11 @@ export const DiskItemInfo: FC<DiskInfoProps> = ({ disk }) => {
 				</PieChart>
 			</ResponsiveContainer>
 		</div>
-		<div className="flex gap-1 justify-center items-center">
+		<div className="flex justify-center items-center">
 			<span>{disk.mount_point}</span>
+
 			<span className={getRatioTheme(disk.used_space / disk.total_space)}>{formatMemorySize(disk.used_space)}</span>
-			/
+			|
 			<span> {formatMemorySize(disk.total_space)}</span>
 		</div>
 	</div>;

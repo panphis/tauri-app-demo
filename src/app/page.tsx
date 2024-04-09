@@ -5,12 +5,19 @@ import { useSystemInfo } from "@/hooks";
 
 export default function Home() {
 
-	const { initializing, loading, systemInfo, cpuUsage, cpuCores, cpuCoresNames } = useSystemInfo();
+	const { initializing, loading, systemInfo, cpuUsage, cpuCores, cpuCoresNames, memories } = useSystemInfo();
 
 	return (
 		<main className='flex flex-col gap-4 p-4'>
 			<Summary systemInfo={systemInfo} loading={initializing} />
-			<Details systemInfo={systemInfo} loading={initializing} initializing={initializing} cpuUsage={cpuUsage} cpuCores={cpuCores} cpuCoresNames={cpuCoresNames}/>
+			<Details
+				systemInfo={systemInfo}
+				loading={initializing}
+				cpuUsage={cpuUsage}
+				cpuCores={cpuCores}
+				cpuCoresNames={cpuCoresNames}
+				memories={memories}
+			/>
 		</main>
 	);
 }
