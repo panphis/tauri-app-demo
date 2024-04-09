@@ -9,7 +9,7 @@ import {
 	Tooltip,
 	Legend,
 	ResponsiveContainer,
-	Brush,
+	// Brush,
 } from "recharts";
 import { generateUniformColors } from "@/utils";
 
@@ -28,11 +28,11 @@ export const CpuCoreUsage: FC<CpuCoreUsageProps> = ({
 		return color;
 	}, [cpuCoresNames]);
 
-	const [brush, setBursh] = useState([0, 0]);
+	// const [brush, setBursh] = useState([0, 0]);
 
 	return (
 		<Fragment>
-			<div className='h-64'>
+			<div className='h-80'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<LineChart
 						width={500}
@@ -48,7 +48,7 @@ export const CpuCoreUsage: FC<CpuCoreUsageProps> = ({
 						<CartesianGrid strokeDasharray='3 3' />
 						<XAxis dataKey='time' />
 						<YAxis />
-						<Tooltip />
+						<Tooltip formatter={(value, name, props) => [`${value}%`, name]} />
 						<Legend />
 						{cpuCoresNames.map((name, index) => {
 							return (
@@ -58,7 +58,7 @@ export const CpuCoreUsage: FC<CpuCoreUsageProps> = ({
 									isAnimationActive={false}
 									dataKey={name}
 									stroke={colors[index]}
-									activeDot={{ r: 8 }}
+									activeDot={{ r: 4 }}
 								/>
 							);
 						})}

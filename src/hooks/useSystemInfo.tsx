@@ -73,6 +73,8 @@ export const useSystemInfo = (): SystemInfoState => {
 					oldValue?.shift()
 					oldValue?.push({ time, cpu_usage: value })
 				}
+				// 需要设置一个新值触发更新
+				_cpuCores.set(name, [...oldValue])
 			});
 			if (_cpuUsage?.length < 100) {
 				_cpuUsage?.push(newNode)
