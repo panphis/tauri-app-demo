@@ -8,19 +8,20 @@ import {
 } from "@/components/ui"
 
 type CardProps = {
-	title?: string,
+	title?: React.ReactNode,
 	icon?: React.ReactNode,
 	children: React.ReactNode,
-	loading?: boolean
+	loading?: boolean,
+	className?: string
 };
 
-export const Card: FC<CardProps> = ({ title, icon, children, loading = false }) => {
-	return loading ? <div className="flex flex-col justify-around items-stretch min-h-[120px]">
+export const Card: FC<CardProps> = ({ title, icon, children, loading = false, className }) => {
+	return loading ? <div className={`flex flex-col justify-around items-stretch min-h-[120px] ${className}`}>
 		<Skeleton className="h-6" />
 		<Skeleton className="h-4" />
 		<Skeleton className="h-4" />
 		<Skeleton className="h-4" />
-	</div> : <UICard>
+	</div> : <UICard className={`${className}`}>
 		<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 			<CardTitle className="text-md font-semibold">
 				{title}

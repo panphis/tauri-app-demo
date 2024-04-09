@@ -1,7 +1,7 @@
 import React, { type FC, useMemo } from "react";
 
 type RatioProps = {
-	className?: string,
+	className?: string;
 	ratio: number | undefined;
 };
 
@@ -13,7 +13,7 @@ export const getRatioTheme = (ratio: number) => {
 	} else {
 		return "text-red-500";
 	}
-}
+};
 
 export const getRatioBGTheme = (ratio: number) => {
 	if (ratio < 0.5) {
@@ -23,12 +23,16 @@ export const getRatioBGTheme = (ratio: number) => {
 	} else {
 		return "bg-red-500";
 	}
-}
+};
 
 export const Ratio: FC<RatioProps> = ({ ratio = 0, className }) => {
 	const theme = useMemo(() => {
-		return getRatioTheme(ratio)
+		return getRatioTheme(ratio);
 	}, [ratio]);
-	return <span className={`${theme} font-mono ${className}`}>{ratio.toFixed(2)}%</span>;
+	return (
+		<span className={`${theme} font-mono ${className}`}>
+			{(ratio * 100).toFixed(2)}%
+		</span>
+	);
 };
-export default Ratio
+export default Ratio;
