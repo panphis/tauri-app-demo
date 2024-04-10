@@ -44,7 +44,7 @@ export const CpuCoreUsage: FC<CpuCoreUsageProps> = ({
 			>
 				<CartesianGrid strokeDasharray='3 3' />
 				<XAxis dataKey='time' />
-				<YAxis />
+				<YAxis domain={[0, 100]} unit={'%'} />
 				<Tooltip formatter={(value, name, props) => [`${value}%`, name]} />
 				<Legend />
 				{cpuCoresNames.map((name, index) => {

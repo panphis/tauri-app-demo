@@ -1,18 +1,27 @@
 import React, { type FC } from "react";
-import { Memory } from "@/components/Chart";
 import { MemoriesProps } from "@/interface";
+import { Memory } from "@/components/Chart";
 import { Card } from "@/components/Card";
-import { getRatioTheme, } from "@/components/Ratio";
+import Ratio, { getRatioTheme, } from "@/components/Ratio";
+import { Separator } from "@/components/ui";
 import { formatMemorySize } from "@/utils";
 
 export const Memories: FC<MemoriesProps> = ({ loading, memories, systemInfo }) => {
 	return (
-		<Card title={<div className="flex flex-row gap-2 items-end">
-			内存信息
+		<Card title={<div className="flex h-5 items-center space-x-1">
+			<span>内存信息</span>
+			<Separator orientation="vertical" />
 			<span className="text-sm text-gray-500">总大小{formatMemorySize(systemInfo?.total_memory)}</span>
+			<Separator orientation="vertical" />
 			<span className={`text-sm ${getRatioTheme(systemInfo?.memory_percentage ?? 0)}`}>已使用{formatMemorySize(systemInfo?.used_memory)}</span>
+			<Separator orientation="vertical" />
 			<span className={`${getRatioTheme(systemInfo?.memory_percentage ?? 0)} text-sm`}>
-				{`${systemInfo?.memory_percentage ?? 0}%`}
+
+				<Ratio
+					ratio={
+						(systemInfo?.memory_percentage ?? 0)
+					}
+				/>
 			</span>
 		</div>
 		}

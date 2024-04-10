@@ -47,7 +47,7 @@ export const Memory: FC<MemoryProps> = ({ data, total }) => {
 					<YAxis domain={[0, total]} tick={false} />
 					<Tooltip formatter={(value, name, props) => {
 						const v = value as number
-						return [`${formatMemorySize(v * 1 || 0)}`, `时间：${name}`]
+						return [`${formatMemorySize(v * 1 || 0)}`, `内存使用`]
 					}} />
 					{/* <Legend /> */}
 					<Line

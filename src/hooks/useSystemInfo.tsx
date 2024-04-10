@@ -14,6 +14,10 @@ interface SystemInfoState {
 	memories: MemoryRecords
 }
 
+const counts = 60
+
+
+
 export const useSystemInfo = (): SystemInfoState => {
 	const [initializing, setInitializing] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
@@ -66,7 +70,7 @@ export const useSystemInfo = (): SystemInfoState => {
 				const oldValue = _cpuCores.get(name)!
 				const value = parseFloat(cpu_usage.toFixed(2))
 				newNode[name] = value
-				if (oldValue?.length < 100) {
+				if (oldValue?.length <= counts) {
 					oldValue?.push({ time, cpu_usage: value })
 				} else {
 					oldValue?.shift()
@@ -75,7 +79,7 @@ export const useSystemInfo = (): SystemInfoState => {
 				// 需要设置一个新值触发更新
 				_cpuCores.set(name, [...oldValue])
 			});
-			if (_cpuUsage?.length < 100) {
+			if (_cpuUsage?.length <= counts) {
 				_cpuUsage?.push(newNode)
 			} else {
 				_cpuUsage?.shift()
@@ -107,7 +111,7 @@ export const useSystemInfo = (): SystemInfoState => {
 			memories.current = [recorder]
 			return
 		} else {
-			if (current?.length < 100) {
+			if (current?.length <= counts) {
 				current?.push(recorder)
 			} else {
 				current?.shift()
@@ -121,6 +125,8 @@ export const useSystemInfo = (): SystemInfoState => {
 		const loadData = async () => {
 			setLoading(true);
 			const result = await get_system_info();
+			console.log(result);
+
 			const { cpus, total_memory, used_memory } = result;
 
 			const now = formatTime(new Date(), 'mm:ss')

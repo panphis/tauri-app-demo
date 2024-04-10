@@ -10,6 +10,7 @@ import {
 	Tooltip,
 	Legend,
 	ResponsiveContainer,
+	YAxis,
 	// Brush,
 } from "recharts";
 
@@ -44,7 +45,7 @@ export const Cores: FC<CoreProps> = ({ cpuCores, cpuCoresNames }) => {
 								>
 									<CartesianGrid strokeDasharray='3 3' />
 									<XAxis dataKey='time' />
-									{/* <YAxis /> */}
+									<YAxis domain={[0, 100]} unit={'%'} />
 									<Tooltip formatter={(value, name, props) => [`${value}%`, key]} />
 									<Legend payload={[{ value: key, type: 'line', id: 'cpu_usage' }]} />
 									<Line
