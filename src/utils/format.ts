@@ -1,7 +1,15 @@
 import dayjs from "dayjs";
 
+type FormatMemorySizeParams = number
 
-export const formatMemorySize = (bytes: number = 0) => {
+interface FormatMemorySizeReturn {
+	value: string;
+	unit: string;
+	string: string;
+}
+
+
+export const formatMemorySize = (bytes: FormatMemorySizeParams = 0): FormatMemorySizeReturn => {
 	const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 	let index = 0;
 
@@ -10,10 +18,14 @@ export const formatMemorySize = (bytes: number = 0) => {
 		index++;
 	}
 	const formattedBytes = bytes.toFixed(2);
-	return `${formattedBytes} ${units[index]}`;
+	return {
+		string: `${formattedBytes} ${units[index]}`,
+		value: formattedBytes,
+		unit: units[index]
+	};
 }
 
-export const formatTime = (time: number|string|Date, format:string = 'YYYY-MM-DD-HH-mm-ss') => {
+export const formatTime = (time: number | string | Date, format: string = 'YYYY-MM-DD-HH-mm-ss') => {
 	return dayjs(time).format(format);
 }
 

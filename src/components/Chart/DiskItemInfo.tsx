@@ -40,7 +40,7 @@ const TooltipContent: FC<any> = ({ active, payload }) => {
 		console.log(payload);
 		const info = payload[0]
 		return (
-			<span>{info.name}: {formatMemorySize(info.value)}</span>
+			<span>{info.name}: {formatMemorySize(info.value).string}</span>
 		);
 	}
 
@@ -86,9 +86,9 @@ export const DiskItemInfo: FC<DiskInfoProps> = ({ disk }) => {
 		<div className="flex justify-center items-center">
 			<span>{disk.mount_point}</span>
 
-			<span className={getRatioTheme(disk.used_space / disk.total_space)}>{formatMemorySize(disk.used_space)}</span>
+			<span className={getRatioTheme(disk.used_space / disk.total_space)}>{formatMemorySize(disk.used_space).string}</span>
 			|
-			<span> {formatMemorySize(disk.total_space)}</span>
+			<span> {formatMemorySize(disk.total_space).string}</span>
 		</div>
 	</div>;
 }; 

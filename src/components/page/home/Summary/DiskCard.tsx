@@ -37,8 +37,8 @@ const DiskItem: FC<DiskInfoProps> = ({ diskInfo }) => {
 					/>
 					<span className={`${styles.diskInfo_size_info} text-nowrap text-sm`}>
 						{" "}
-						{formatMemorySize(diskInfo.used_space)} /{" "}
-						{formatMemorySize(diskInfo.total_space)}
+						{formatMemorySize(diskInfo.used_space).string} /{" "}
+						{formatMemorySize(diskInfo.total_space).string}
 					</span>
 				</div>
 			</TooltipTrigger>
@@ -56,17 +56,17 @@ const DiskItem: FC<DiskInfoProps> = ({ diskInfo }) => {
 				<Description
 					labelWidth={80}
 					label='可用空间'
-					description={formatMemorySize(diskInfo.available_space)}
+					description={formatMemorySize(diskInfo.available_space).string}
 				/>
 				<Description
 					labelWidth={80}
 					label='已用空间'
-					description={formatMemorySize(diskInfo.used_space)}
+					description={formatMemorySize(diskInfo.used_space).string}
 				/>
 				<Description
 					labelWidth={80}
 					label='总空间'
-					description={formatMemorySize(diskInfo.total_space)}
+					description={formatMemorySize(diskInfo.total_space).string}
 				/>
 				<Description
 					labelWidth={80}

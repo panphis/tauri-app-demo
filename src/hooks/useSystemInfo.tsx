@@ -103,7 +103,6 @@ export const useSystemInfo = (): SystemInfoState => {
 		}
 	}, [])
 
-
 	const generatorMemories = useCallback((used_memory: Memory, total_memory: Memory, time: string) => {
 		const { current } = memories
 		const recorder = { time, value: used_memory }
@@ -121,14 +120,14 @@ export const useSystemInfo = (): SystemInfoState => {
 		memories.current = [...current]
 	}, [])
 
+	// ! todo useEffect 暂时有问题
+	// https://github.com/tauri-apps/tauri/issues/9296
+	// https://github.com/tauri-apps/tauri/issues/8916
 	useEffect(() => {
 		const loadData = async () => {
 			setLoading(true);
 			const result = await get_system_info();
-			console.log(result);
-
 			const { cpus, total_memory, used_memory } = result;
-
 			const now = formatTime(new Date(), 'mm:ss')
 			generatorCpus(cpus, now)
 			generatorMemories(used_memory, total_memory, now)
@@ -147,27 +146,13 @@ export const useSystemInfo = (): SystemInfoState => {
 				}, 1000);
 			}
 		};
-
 		init()
 		return () => {
 			if (intervalId.current) {
 				clearInterval(intervalId.current);
 			}
 		};
-	}, [generatorCpus]);
-
-	useEffect(() => {
-		return () => {
-			try {
-				if (intervalId.current) {
-					clearInterval(intervalId.current);
-				}
-			} catch (error) {
-
-			}
-		};
-	}, [])
-
+	}, []);
 
 
 	return {

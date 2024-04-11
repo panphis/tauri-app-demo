@@ -20,15 +20,7 @@ type MemoryProps = {
 
 export const Memory: FC<MemoryProps> = ({ data, total }) => {
 
-	const ticks = useMemo(() => {
-		return [
-			{ value: 0, label: '0%' },
-			{ value: formatMemorySize(total), label: '100%' },
-		]
-	}, [total])
-
 	return <Fragment>
-
 		<div className='h-80'>
 			<ResponsiveContainer width='100%' height='100%'>
 				<LineChart
@@ -47,7 +39,7 @@ export const Memory: FC<MemoryProps> = ({ data, total }) => {
 					<YAxis domain={[0, total]} tick={false} />
 					<Tooltip formatter={(value, name, props) => {
 						const v = value as number
-						return [`${formatMemorySize(v * 1 || 0)}`, `内存使用`]
+						return [`${formatMemorySize(v * 1 || 0).string}`, `内存使用`]
 					}} />
 					{/* <Legend /> */}
 					<Line
