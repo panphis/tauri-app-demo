@@ -1,11 +1,9 @@
 import React, { type FC, useMemo } from "react";
 import { Card, Ratio, getRatioBGTheme, Description } from "@/components";
-import {
-	Badge,
+import { 
 	Progress,
 	Tooltip,
-	TooltipContent,
-	TooltipProvider,
+	TooltipContent, 
 	TooltipTrigger,
 } from "@/components/ui";
 import { PropsSystemInfo, DiskInfo } from "@/interface";

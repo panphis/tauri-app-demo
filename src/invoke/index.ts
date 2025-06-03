@@ -1,5 +1,5 @@
 import { SystemInfo } from "@/interface";
-import { invoke } from "@tauri-apps/api/tauri";
+import { invoke } from "@tauri-apps/api/core";
 
 export const get_system_info = async (): Promise<SystemInfo> => {
 	const systemInfo: SystemInfo = await invoke("get_system_info");

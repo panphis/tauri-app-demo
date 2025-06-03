@@ -52,7 +52,7 @@ pub struct SystemInfo {
     disks: Vec<DiskInfo>,
     free_memory: u64,
     used_memory: u64,
-    memory_percentage: u64,
+    memory_percentage: f32,
     total_memory: u64,
 }
 
@@ -109,7 +109,7 @@ impl SystemInfo {
         let total_memory = sys.total_memory();
         let used_memory = sys.used_memory();
         let free_memory = sys.free_memory();
-        let memory_percentage = used_memory / total_memory;
+        let memory_percentage = used_memory as f32 / total_memory as f32;
 
         let current_system_info = SystemInfo {
             system_name,
